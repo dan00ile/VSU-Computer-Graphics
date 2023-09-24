@@ -67,8 +67,7 @@ public class DrawPanel extends JPanel {
 
         Building a = new Building(100, 300, 50, 50, Color.WHITE);
         a.draw(gr);*/
-        Plane a = new Plane(this.getWidth()/2 - 50, this.getHeight()/2 - 50, 1, 1,1);
-        a.draw(gr);
+/*
 
         Building b = new Building(100, 200, 200, 100, Color.GRAY, true);
         b.draw(gr);
@@ -77,7 +76,10 @@ public class DrawPanel extends JPanel {
         b1.draw(gr);
 
 
+ */
 
+        Plane a = new Plane(this.getWidth() - 50, this.getHeight() - 50,  0.5 , 1);
+        a.draw(gr);
 
 
     }

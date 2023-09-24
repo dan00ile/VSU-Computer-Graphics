@@ -1,6 +1,7 @@
 package ru.vsu.cs.shul.task1;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.Random;
 
@@ -78,26 +79,6 @@ public class DrawingUtils {
         }
     }
 
-
-    public static void paintPlane(Graphics2D g, int x, int y, int scale, int pitch, int roll, Color colorOfPlane, Color colorOfName) {
-        g.drawOval(x, y, 100, 20);
-        g.drawOval(x - 100, y, 100, 20);
-
-
-        GeneralPath path = new GeneralPath();
-        path.moveTo(x - 10, y);
-        path.curveTo(x - 10, y, x - 10, y - 20, x - 4, y - 100);
-        path.lineTo(x + 4, y - 100);
-        path.curveTo(x + 4, y - 100, x + 10, y - 20, x + 10, y);
-        path.lineTo(x - 10, y);
-        g.fill(path);
-        g.draw(path);
-
-        g.fillOval(x - 4, y - 100 - 10, 8, 20);
-
-
-    }
-
     public static void drawWindow(Graphics2D g, int x, int y, int w, int h, boolean light, boolean sticks) {
         g.setColor(Color.black);
         g.fillRect(x, y, w, h);
@@ -122,4 +103,63 @@ public class DrawingUtils {
 
 
     }
+
+
+    public static void paintPlane(Graphics2D g, int w, int h, double scale, int roll, Color colorOfPlane, Color colorOfName) {
+
+        // Рисуем хвост
+        // w = 750 h = 550 x = 350 y = 250
+        GeneralPath path = new GeneralPath();
+        path.moveTo(x - 10, y);
+        path.curveTo(x - 10, y, x - 10, y - 20, x - 4, y - 100);
+        path.lineTo(x + 4, y - 100);
+        path.curveTo(x + 4, y - 100, x + 10, y - 20, x + 10, y);
+        path.lineTo(x - 10, y);
+        g.fill(path);
+
+
+        g.fillOval(x - 4, y - 100 - 10, 8, 20);
+
+
+        path.moveTo(x + 10, y);
+        path.curveTo(x + 10, y, x + 12, y + 11, x + 30, y + 15);
+        path.lineTo(x + 170, y + 15);
+        path.lineTo(x + 170, y + 25);
+        path.curveTo(x + 170, y + 25, x + 168, y + 65, x + 120, y + 61);
+        path.lineTo(x + 60, y + 61);
+        path.curveTo(x + 60, y + 61, x + 50, y + 60, x + 40, y + 41);
+        path.lineTo(x + 30, y + 41);
+        path.lineTo(x + 30, y + 15);
+
+        path.moveTo(x+ 30, y + 35);
+        path.curveTo(x + 30, y + 35, x + 20, y + 40, x + 4, y + 41 );
+
+        g.fillRoundRect(x-8, y+50, 16, 25, 10, 10);
+        g.fillRoundRect(x-4, y + 41, 8,9,2,2);
+
+        path.moveTo(x - 4, y + 41);
+        path.curveTo(x - 4, y + 41, x - 20, y + 40, x - 30, y + 35);
+
+        path.moveTo(x - 30, y + 41);
+        path.lineTo(x - 30, y + 15);
+
+
+
+
+        g.draw(path);
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
 }
