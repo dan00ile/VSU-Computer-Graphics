@@ -1,20 +1,41 @@
 package ru.vsu.cs.shul.task1;
 
 import ru.vsu.cs.shul.task1.elements.Building;
+import ru.vsu.cs.shul.task1.elements.Moon;
 import ru.vsu.cs.shul.task1.elements.Plane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class DrawPanel extends JPanel {
 
+    private  WindowSizeProvider size = new WindowSizeProvider(0, 0);
+
+    private Building c,d;
+    private Moon b;
+    private Plane a;
+
     public DrawPanel() {
+
+        a = new Plane(size,  0.5 , 1, getWidth() / 2 - 50, getHeight()/2 - 50);
+
+        b = new Moon(size);
+
+        c = new Building(150, 200, 300, 300, Color.GRAY, true);
+
+        d = new Building(500, 200, 300, 300, Color.GRAY, false);
+
+
     }
+
+
+
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D gr = (Graphics2D) g;
+
         /*
         g.setColor(Color.CYAN);
         g.drawLine(10, 10, 200, 100);
@@ -78,9 +99,24 @@ public class DrawPanel extends JPanel {
 
  */
 
-        Plane a = new Plane(this.getWidth() - 50, this.getHeight() - 50,  0.5 , 1);
-        a.draw(gr);
 
+
+        super.paint(g);
+        Graphics2D gr = (Graphics2D) g;
+
+        size.setH(this.getHeight());
+
+        size.setW(this.getWidth());
+
+        g.setColor(new Color(32,103,125));
+        g.fillRect(0,0,getWidth(),getHeight());
+
+        c.draw(gr);
+        d.draw(gr);
+
+
+        b.draw(gr);
+        a.draw(gr);
 
     }
 }
