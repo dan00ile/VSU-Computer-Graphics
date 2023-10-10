@@ -1,24 +1,15 @@
 package ru.vsu.cs.shul.task1;
 
+import ru.vsu.cs.shul.task1.elements.plane.Elevator;
 import ru.vsu.cs.shul.task1.elements.plane.Engine;
 import ru.vsu.cs.shul.task1.elements.plane.Orientation;
 import ru.vsu.cs.shul.task1.elements.plane.Wings;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
-import java.util.Random;
 
 public class DrawingUtils {
-
-    private static Random random = new Random();
-
-
-
     public static void paintPlane(Graphics2D g, WindowSizeProvider size, double scale, int roll, int x, int y) {
-
-        // w = 750 h = 550 x = 350 y = 250
-        // x = 394 y == 282
 
         int h = size.getH();
 
@@ -26,6 +17,9 @@ public class DrawingUtils {
 
         x = w / 2;
         y = h / 2;
+
+        System.out.println("w " + w + " h " + h + " x " + x + " y " + y);
+
 
         Wings leftWing = new Wings(w, h, x, y, Orientation.LEFT);
 
@@ -36,24 +30,23 @@ public class DrawingUtils {
 
         g.setColor(Color.BLACK);
 
-        g.fillOval(x + 80, y + 45, 20,25);
-        g.fillOval(x - 100, y + 45, 20,25);
+        g.fillOval((int) (w * 0.6015), (int) (h * 0.5787), (int) (w * 0.02538), (int) (h * 0.04424));
+        g.fillOval((int) (w * 0.37309), (int) (h * 0.5787), (int) (w * 0.02538), (int) (h * 0.04424));
 
         Engine test = new Engine(w, h, x, y, Orientation.LEFT);
         Engine test2 = new Engine(w, h, x, y, Orientation.RIGHT);
         test.draw(g);
         test2.draw(g);
 
-        // engine.lineTo((x + 85) + 60 * -Math.cos(Math.PI/6), (y - 30) + 60 * -Math.sin(Math.PI/6));
 
         GeneralPath fuselage = new GeneralPath();
-        fuselage.moveTo(x + 50, y + 5);
-        fuselage.lineTo(x - 50, y + 5);
-        fuselage.curveTo(x - 50, y + 5, x - 45, y - 110, x, y - 100);
-        fuselage.moveTo(x + 50, y + 5);
-        fuselage.curveTo(x + 50, y + 5, x + 45, y - 110, x, y - 100);
+        fuselage.moveTo(w * 0.5634, h * 0.5079);
+        fuselage.lineTo(w * 0.4365, h * 0.5079);
+        fuselage.curveTo(w * 0.4365, h * 0.5079, w * 0.4428, h * 0.3044, w * 0.5, h * 0.3044);
+        fuselage.moveTo(w * 0.5634, h * 0.5079);
+        fuselage.curveTo(w * 0.5634, h * 0.5079, w * 0.5571, h * 0.3044, w * 0.5, h * 0.3044);
 
-        g.setPaint(new LinearGradientPaint(x - 50, y, x + 50, y,
+        g.setPaint(new LinearGradientPaint((float) (w * 0.5634), y, (float) (w * 0.4365), y,
                 new float[]{0.0f, 0.2f, 0.5f, 0.8f, 1.0f}, new Color[]{Color.DARK_GRAY, Color.GRAY,
                 Color.WHITE, Color.GRAY, Color.DARK_GRAY}, MultipleGradientPaint.CycleMethod.REFLECT));
         g.fill(fuselage);
@@ -62,28 +55,25 @@ public class DrawingUtils {
 
         Polygon a = new Polygon();
 
-        a.addPoint(x + 50, y + 5);
-        a.addPoint(x - 50, y + 5);
-        a.addPoint(x - 170, y + 15);
-        a.addPoint(x + 170, y + 15);
+        a.addPoint((int) (w * 0.5634), (int) (h * 0.5079));
+        a.addPoint((int) (w * 0.4365), (int) (h * 0.5079));
+        a.addPoint((int) (w * 0.2843), (int) (h * 0.5265));
+        a.addPoint((int) (w * 0.7157), (int) (h * 0.5265));
 
         g.fill(a);
 
-        // w = 750 h = 550 x = 350 y = 250
-        // x = 394 y == 282
-
         GeneralPath keel = new GeneralPath();
-        keel.moveTo(x - 10, y);
-        keel.curveTo(x - 10, y, x - 10, y - 20, x - 4, y - 140);
+        keel.moveTo(w * 0.4873, h * 0.5);
+        keel.curveTo(w * 0.4873, h * 0.5, w * 0.4873, h * 0.4637, w * 0.4949, h * 0.2513);
 
-        keel.curveTo(x - 4, y - 140 , x - 2, y - 170, x, y - 160);
-        keel.curveTo(x, y - 160, x +2, y - 170, x + 4, y - 140);
+        keel.curveTo(w * 0.4949, h * 0.2513 , w * 0.49746, h * 0.1982, w * 0.5, h * 0.2159);
+        keel.curveTo(w * 0.5, h * 0.2159, w * 0.5025, h * 0.1982, w * 0.5050, h * 0.2513);
         //keel.lineTo(x + 4, y - 140);
 
-        keel.curveTo(x + 4, y - 140, x + 10, y - 20, x + 10, y);
-        keel.lineTo(x, y);
+        keel.curveTo(w * 0.5050, h * 0.2513, w * 0.5126, h * 0.4637, w * 0.5126, h * 0.5);
+        keel.lineTo(w * 0.5, h * 0.5);
 
-        g.setPaint(new LinearGradientPaint(x, y - 140, x, y,
+        g.setPaint(new LinearGradientPaint((float) (w * 0.5), (float) (h * 0.2513), (float) (w * 0.5), (float) (h * 0.5),
                 new float[]{0.0f, 0.5f, 0.7f}, new Color[]{Color.BLACK, Color.DARK_GRAY, Color.GRAY}));
 
         g.fill(keel);
@@ -92,70 +82,53 @@ public class DrawingUtils {
 
         g.setStroke(new BasicStroke(2));
 
-        g.drawLine(x, y - 140, x, y);
-        g.drawLine(x - 10, y, x + 10, y);
+
+        g.drawLine((int) (w * 0.5), (int) (h * 0.2513), (int) (w*0.5), (int) (h*0.5));
+        g.drawLine((int) (w * 0.4873), (int) (h*0.5), (int) (w * 0.51269), (int) (h*0.5));
 
         g.setStroke(new BasicStroke(1));
 
-        //g.fillOval(x - 4, (int) (0.272 * h - 10), (int) (0.013 * w), 20);
 
         GeneralPath underKeel = new GeneralPath();
-        underKeel.moveTo(x + 10, y);
-        underKeel.curveTo(x + 10, y, x + 12, y + 11, x + 30, y + 15);
 
-        underKeel.lineTo(x + 30, y + 35);
-        underKeel.curveTo(x + 30, y + 35, x + 20, y + 40, x + 4, y + 41);
+        underKeel.moveTo(w * 0.51269, h * 0.5);
+        underKeel.curveTo(w * 0.51269, h * 0.5, w * 0.5152, h * 0.51858, w * 0.538, h * 0.5256);
 
-        underKeel.lineTo(x - 4, y + 41);
-        underKeel.curveTo(x - 4, y + 41, x - 20, y + 40, x - 30, y + 35);
+        underKeel.lineTo(w * 0.538, h * 0.561);
+        underKeel.curveTo(w * 0.538, h * 0.561, w * 0.52538, h * 0.5699, w * 0.505, h * 0.57168);
 
-        underKeel.lineTo(x - 30, y + 15);
+        underKeel.lineTo(w * 0.4949, h * 0.57168);
+        underKeel.curveTo(w * 0.4949, h * 0.57168, w * 0.4746, h * 0.5699, w * 0.4619, h * 0.561);
 
-        underKeel.curveTo(x - 30, y + 15, x - 12, y + 11, x - 10, y);
+        underKeel.lineTo(w * 0.4619, h * 0.5256);
 
-        underKeel.lineTo(x + 10, y);
+        underKeel.curveTo(w * 0.4619, h * 0.5256, w * 0.4847, h * 0.5185, w * 0.4873, h * 0.5);
 
-        g.setPaint(new LinearGradientPaint(x, y, x, y + 41,
+        underKeel.lineTo(w * 0.51269, h * 0.5);
+
+
+
+        g.setPaint(new LinearGradientPaint((float) (w * 0.5), (float) (h * 0.5), (float) (w * 0.5), (float) (h * 0.57168),
                 new float[]{0.0f, 0.8f, 0.9f}, new Color[]{Color.GRAY, Color.DARK_GRAY, Color.BLACK}));
 
         g.fill(underKeel);
 
 
-        g.fillRoundRect(x - 10, y + 50, 20, 35, 10, 10);
-        g.fillRoundRect(x - 4, y + 41, 8, 9, 2, 2);
 
+        g.fillRoundRect((int) (w * 0.4873), (int) (h * 0.5876), (int) (w * 0.02538), (int) (h * 0.0619), 10, 10);
+        g.fillRoundRect((int) (w * 0.4949), (int) (h * 0.57168), (int) (w * 0.0101), (int) (h * 0.0159), 2, 2);
 
-        GeneralPath rightElevator = new GeneralPath();
-        rightElevator.moveTo(x + 30, y + 15);
-        rightElevator.lineTo(x + 170, y + 15);
-        rightElevator.lineTo(x + 170, y + 25);
-        rightElevator.curveTo(x + 170, y + 25, x + 168, y + 65, x + 120, y + 61);
-        rightElevator.lineTo(x + 60, y + 61);
-        rightElevator.curveTo(x + 60, y + 61, x + 50, y + 60, x + 40, y + 41);
-        rightElevator.lineTo(x + 30, y + 41);
-        rightElevator.lineTo(x + 30, y + 15);
+        // w 788 h 565 x 394 y 282
 
+        // x = 1/788*y (W)
+        // x = 1/565*y (H)
 
-        g.setPaint(new LinearGradientPaint(x, y + 15, x + 170, y + 15,
-                new float[]{0.0f, 0.3f, 0.5f, 0.7f, 1.0f}, new Color[]{Color.GRAY, Color.white, new Color(215, 215, 215), Color.white, Color.GRAY}, MultipleGradientPaint.CycleMethod.REFLECT));
-        g.fill(rightElevator);
+        Elevator rightElevator = new Elevator(w, h, Orientation.RIGHT);
+        Elevator leftElevator = new Elevator(w, h, Orientation.LEFT);
 
+        rightElevator.draw(g);
+        leftElevator.draw(g);
 
-        GeneralPath leftElevator = new GeneralPath();
-        leftElevator.moveTo(x - 30, y + 41);
-        leftElevator.lineTo(x - 30, y + 15);
-        leftElevator.lineTo(x - 170, y + 15);
-        leftElevator.lineTo(x - 170, y + 25);
-        leftElevator.curveTo(x - 170, y + 25, x - 168, y + 65, x - 120, y + 61);
-        leftElevator.lineTo(x - 60, y + 61);
-        leftElevator.curveTo(x - 60, y + 61, x - 50, y + 60, x - 40, y + 41);
-        leftElevator.lineTo(x - 30, y + 41);
-
-        g.fill(leftElevator);
-
-        g.setColor(Color.BLACK);
-        g.draw(rightElevator);
-        g.draw(leftElevator);
     }
 
 

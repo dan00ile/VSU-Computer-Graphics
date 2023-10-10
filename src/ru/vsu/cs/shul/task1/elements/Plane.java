@@ -7,24 +7,23 @@ import java.awt.*;
 
 public class Plane {
 
-    private WindowSizeProvider size;
+    private final WindowSizeProvider size;
 
-    private int roll, x, y, w, h;
+    private final int roll, offsetX, offsetY;
 
-    private double scale;
+    private final double scale;
 
     private Color colorOfPlane, colorOfName;
 
-
-    public Plane(WindowSizeProvider size, double scale, int roll, int x, int y) {
+    public Plane(WindowSizeProvider size, double scale, int roll, int offsetX, int offsetY) {
         this.size = size;
         this.scale = scale;
         this.roll = roll;
-        this.x = x;
-        this.y = y;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
     }
 
     public void draw(Graphics2D g) {
-        DrawingUtils.paintPlane(g, size, scale, roll, x, y);
+        DrawingUtils.paintPlane(g, size, scale, roll, offsetX, offsetY);
     }
 }
