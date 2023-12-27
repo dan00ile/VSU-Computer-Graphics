@@ -121,13 +121,14 @@ public class Building {
                 listOfW.add(new Window(x + w - space * i - i * windSize,i % 2 == 0 ? y + h / 3 : y + h / 4,
                         windSize, random.nextBoolean(), true));
             }
-            int brickCount = random.nextInt(15) + 1;
+            int brickCount = random.nextInt((int) (0.0003 * w * h) + 1) + 1;
+
 
             for (int i = 0; i < brickCount; i++) {
-                int brickHeight = random.nextInt(5) + 5;
+                int brickHeight = random.nextInt(3) + 5;
                 int brickWidth = brickHeight * 2;
                 int brickX = random.nextInt(w - brickWidth - 1) + x;
-                int brickY = random.nextInt(h / 3 - brickHeight - 1) + y + h * 2 / 3;
+                int brickY = random.nextInt(h / 3 - brickHeight - 1 > 0 ? h / 3 - brickHeight - 1 : 1) + y + h * 2 / 3;
 
                 listOfB.add(new Brick(brickX, brickY, brickWidth, brickHeight));
             }
@@ -156,6 +157,11 @@ public class Building {
 
         this.drawWindows(g);
         this.drawRandBricks(g);
+
+
+        g.drawRoundRect(x, y, w, h, 5, 5);
+
+
 
 
     }
